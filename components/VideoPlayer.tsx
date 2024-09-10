@@ -41,7 +41,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
           html: 'Quality',
           click: function () {
             art.setting.show = true;
-            art.setting.name = 'Quality';
+            art.setting.toggle();
           },
         },
       ],

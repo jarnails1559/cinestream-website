@@ -18,7 +18,7 @@ export default function CategoryPage() {
       setError(null)
       try {
         console.log("Fetching movies for genre:", genre);
-        const genreEntry = Object.entries(genreMap).find(([id, name]) => name.toLowerCase() === genre)
+        const genreEntry = Object.entries(genreMap).find(([name]) => name.toLowerCase() === genre)
         if (!genreEntry) {
           throw new Error(`Invalid genre: ${genre}`)
         }

@@ -1,5 +1,5 @@
 const CORS_PROXY = 'https://cors-proxy.rdpsell01.workers.dev/';
-const BASE_URL = `https://imdb-api.rdpsell01.workers.dev`;
+// Remove the unused BASE_URL constant
 const RIVESTREAM_BASE_URL = `${CORS_PROXY}https://rivestream.live/api`;
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 
@@ -68,10 +68,19 @@ export async function searchMovies(query: string): Promise<MovieSearchResult[]> 
   const data = await response.json();
   
   // Map the response to match the MovieSearchResult interface
-  return data.results.map((item: any) => ({
+  return data.results.map((item: {
+    id: number;
+    title?: string;
+    name?: string;
+    release_date?: string;
+    first_air_date?: string;
+    media_type: string;
+    poster_path: string;
+    backdrop_path: string;
+  }) => ({
     id: item.id.toString(),
-    title: item.title || item.name,
-    year: new Date(item.release_date || item.first_air_date).getFullYear(),
+    title: item.title || item.name || '',
+    year: new Date(item.release_date || item.first_air_date || '').getFullYear(),
     type: item.media_type === 'movie' ? 'movie' : 'tvSeries',
     image: item.poster_path,
     image_large: item.backdrop_path,

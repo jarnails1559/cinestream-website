@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Star, Calendar, Play, Info, Plus, Check, Clock, Film, Tv, Award, Users } from 'lucide-react'
+import { Star, Calendar, Play, Plus, Check, Film, Tv, Users } from 'lucide-react'
 import { getTVShowDetails, getSuggestedTVShows, TVShow, getImageUrl, addToWatchlist, removeFromWatchlist, isInWatchlist, addToRecentlyViewed } from '@/lib/api'
 
 export default function TVShowDetailPage({ params }: { params: { id: string } }) {

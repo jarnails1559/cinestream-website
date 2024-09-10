@@ -19,7 +19,6 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>([])
-  const [trendingMovies, setTrendingMovies] = useState<TrendingMovie[]>([])
   const router = useRouter()
 
   useEffect(() => {
@@ -32,7 +31,6 @@ export default function Header() {
     const fetchTrendingMovies = async () => {
       try {
         const data = await getTrendingMovies()
-        setTrendingMovies(data.results)
         generateRandomNotifications(data.results)
       } catch (error) {
         console.error('Failed to fetch trending movies:', error)
@@ -79,17 +77,6 @@ export default function Header() {
 
   const clearAllNotifications = () => {
     setNotifications([])
-  }
-
-  // New function to add a watchlist notification
-  const addWatchlistNotification = (movieTitle: string) => {
-    const newNotification: Notification = {
-      id: Date.now().toString(),
-      message: `Added "${movieTitle}" to watchlist successfully`,
-      type: 'success',
-      timestamp: new Date()
-    }
-    setNotifications(prev => [newNotification, ...prev])
   }
 
   // New function to show "Coming Soon" message for User Profile
